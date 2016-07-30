@@ -1,12 +1,10 @@
-## _Hair Salon_
-
-## _Project Specifications_
+# _Hair Salon_
 
 #### By _**Rouz Majlessi**_
 
 ## Description/Specs
 
-This website well have two tables one for stylists and for for clients. For each stylists the table will add a client to them. The user will be able to click on stylists or clients at the home-page/index-page. Depending on what the user clicks they will be directed to another page ; either stylists or clients. At that point they can eithr view or add to each page.
+This website well have two tables one for stylists and for for clients. For each stylists the table will add a client to them. The user will be able to click on stylists or clients at the home-page/index-page. Depending on what the user clicks they will be directed to another page ; either stylists or clients. At that point they can either view or add to each page.
 
 ## Setup/Installation
 

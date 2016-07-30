@@ -1,17 +1,30 @@
+using Xunit;
+using System.Collections.Generic;
+using System;
+using System.Data;
 using System.Data.SqlClient;
 
-namespace ToDoList
+namespace SalonList
 {
-  public class ToDoTest : IDisposable
+  public class StylistTest : IDisposable
   {
-    public ToDoTest()
+    public StylistTest()
     {
-      DBConfiguration.ConnectionString = "Data Source=(localdb)\\mssqllocaldb;Initial Catalog=todo_test;Integrated Security=SSPI;";
+      DBConfiguration.ConnectionString = "Data Source=(localdb)\\mssqllocaldb;Initial Catalog=hair_salon_test;Integrated Security=SSPI;";
     }
+
+    [Fact]
+    public void Test1_DatabaseEmptyAtFirst()
+    {
+      int result = Stylist.GetAll().Count;
+
+      Assert.Equal(0, result);
+    }
+
 
     public void Dispose()
     {
-      Task.DeleteAll();
+      Stylist.DeleteAll();
     }
   }
 }

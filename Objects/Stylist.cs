@@ -6,19 +6,26 @@ namespace HairSalon
 {
   public class Stylist
   {
+    // properties
+
     private int _id;
     private string _name;
+
+
     // constructor
     public Stylist(string Name, int Id = 0)
     {
       _id = Id;
       _name = Name;
     }
+
+
     // getters and setters
     public int GetId()
     {
       return _id;
     }
+
     public string GetName()
     {
       return _name;
@@ -27,6 +34,7 @@ namespace HairSalon
     {
       _name = newName;
     }
+
     public static List<Stylist> GetAll()
     {
       List<Stylist> allStylists = new List<Stylist>{};
@@ -70,6 +78,37 @@ namespace HairSalon
         bool nameEquality = (this.GetName() == newStylist.GetName());
         return (nameEquality);
       }
+    }
+
+
+    public void Save()
+    {
+      // 3 steps in when we use parameters in our queries
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      // placeholder @sytlistName
+      SqlCommand cmd = new SqlCommand("INSERT INTO stylists(name) OUTPUT INSERTED.id VALUES (@stylistName);", conn);
+      // declare an SqlParameter object and assign values
+      SqlParameter nameParameter = new SqlParameter();
+      nameParameter.ParameterName = "@StylistName";
+      nameParameter.Value = this.GetName();
+      cmd.Parameters.Add(nameParameter);//adding the sqlparameter object to the sqlcommand command properties
+      SqlDataReader rdr = cmd.ExecuteReader();
+
+      while(rdr.Read())
+      {
+        this._id = rdr.GetInt32(0);
+      }
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+      if (conn != null)
+      {
+        conn.Close();
+      }
+
     }
 
 

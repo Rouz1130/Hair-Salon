@@ -4,7 +4,7 @@ using System;
 using System.Data;
 using System.Data.SqlClient;
 
-namespace SalonList
+namespace HairSalon
 {
   public class StylistTest : IDisposable
   {
@@ -16,11 +16,12 @@ namespace SalonList
     [Fact]
     public void Test1_DatabaseEmptyAtFirst()
     {
+      //Arrange, Act
       int result = Stylist.GetAll().Count;
 
+      //Assert
       Assert.Equal(0, result);
     }
-
 
     public void Dispose()
     {

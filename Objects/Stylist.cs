@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System;
 
-namespace SalonList
+namespace HairSalon
 {
   public class Stylist
   {
@@ -61,9 +61,9 @@ namespace SalonList
     {
       SqlConnection conn = DB.Connection();
       conn.Open();
-      SqlCommand cmd = new SqlCommand("DELETE FROM stylists,", conn);
+      SqlCommand cmd = new SqlCommand("DELETE FROM stylists;", conn);
       cmd.ExecuteNonQuery();
       conn.Close();
-        }
-      }
     }
+  }
+}

@@ -1,7 +1,7 @@
 using System.Data;
 using System.Data.SqlClient;
 
-namespace SalonList
+namespace HairSalon
 {
   public class DB
   {

@@ -32,9 +32,23 @@ namespace HairSalon
     }
 
 
+
     [Fact]
-   public void Test3_Save_AssignIdToObject()
-   {
+    public void Test3_SavesToDatabase()
+    {
+      Stylist testStylist = new Stylist("Jimmy");
+
+      testStylist.Save();
+      List<Stylist> result = Stylist.GetAll();
+      List<Stylist> testList = new List<Stylist>{testStylist};
+
+      Assert.Equal(testList, result);
+    }
+
+
+    [Fact]
+    public void Test4_Save_AssignIdToObject()
+    {
 
      Stylist testStylist = new Stylist("Anthony");
 
@@ -45,7 +59,7 @@ namespace HairSalon
      int testId = testStylist.GetId();
 
      Assert.Equal(testId, result);
-   }
+    }
 
 
 

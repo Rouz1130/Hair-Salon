@@ -43,7 +43,7 @@ namespace HairSalon
       conn.Open();
       //using parameters: creating sql command
       SqlCommand cmd = new SqlCommand("SELECT * FROM stylists;", conn);
-      // no placeholder in the aboue command : place holder example is @stylists
+      // no placeholder in the above command : place holder example is @stylists
       SqlDataReader rdr = cmd.ExecuteReader();
 
       while(rdr.Read())

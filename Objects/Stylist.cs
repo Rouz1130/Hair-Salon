@@ -8,13 +8,13 @@ namespace HairSalon
   {
     private int _id;
     private string _name;
-
+    // constructor
     public Stylist(string Name, int Id = 0)
     {
       _id = Id;
       _name = Name;
     }
-
+    // getters and setters
     public int GetId()
     {
       return _id;
@@ -33,8 +33,9 @@ namespace HairSalon
 
       SqlConnection conn = DB.Connection();
       conn.Open();
-
+      //using parameters: creating sql command
       SqlCommand cmd = new SqlCommand("SELECT * FROM stylists;", conn);
+      // no placeholder in the aboue command : place holder example is @stylists
       SqlDataReader rdr = cmd.ExecuteReader();
 
       while(rdr.Read())
@@ -56,6 +57,21 @@ namespace HairSalon
 
       return allStylists;
     }
+    // like the kitten example, allows us too use two same names without it getting confused
+    public override bool Equals(System.Object otherStylist)
+    {
+      if (!(otherStylist is Stylist))
+      {
+        return false;
+      }
+      else
+      {
+        Stylist newStylist = (Stylist) otherStylist;
+        bool nameEquality = (this.GetName() == newStylist.GetName());
+        return (nameEquality);
+      }
+    }
+
 
     public static void DeleteAll()
     {

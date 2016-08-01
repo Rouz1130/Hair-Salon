@@ -45,7 +45,6 @@ namespace HairSalon
       Assert.Equal(testList, result);
     }
 
-
     [Fact]
     public void Test4_Save_AssignIdToObject()
     {
@@ -62,6 +61,17 @@ namespace HairSalon
     }
 
 
+    [Fact]
+    public void Test5_Find_NewStylistInDatabase()
+  {
+
+    Stylist testStylist = new Stylist ("Maggy");
+    testStylist.Save();
+
+    Stylist foundStylist = Stylist.Find(testStylist.GetId());
+
+    Assert.Equal(testStylist, foundStylist);
+  }
 
     public void Dispose()
     {

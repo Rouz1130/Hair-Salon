@@ -45,33 +45,52 @@ namespace HairSalon
       Assert.Equal(testList, result);
     }
 
+
     [Fact]
     public void Test4_Save_AssignIdToObject()
     {
 
-     Stylist testStylist = new Stylist("Anthony");
+      Stylist testStylist = new Stylist("Anthony");
 
-     testStylist.Save();
-     Stylist savedStylist = Stylist.GetAll()[0];
+      testStylist.Save();
+      Stylist savedStylist = Stylist.GetAll()[0];
 
-     int result = savedStylist.GetId();
-     int testId = testStylist.GetId();
+      int result = savedStylist.GetId();
+      int testId = testStylist.GetId();
 
-     Assert.Equal(testId, result);
+      Assert.Equal(testId, result);
     }
 
 
     [Fact]
     public void Test5_Find_NewStylistInDatabase()
-  {
+    {
 
-    Stylist testStylist = new Stylist ("Maggy");
-    testStylist.Save();
+      Stylist testStylist = new Stylist ("Maggy");
+      testStylist.Save();
 
-    Stylist foundStylist = Stylist.Find(testStylist.GetId());
+      Stylist foundStylist = Stylist.Find(testStylist.GetId());
 
-    Assert.Equal(testStylist, foundStylist);
-  }
+      Assert.Equal(testStylist, foundStylist);
+    }
+
+
+    [Fact]
+    public void Test6_Update_StylistToDatabase()
+    {
+      string name = "Maggy";
+      Stylist testStylist = new Stylist(name);
+      testStylist.Save();
+      string newName = "Steve";
+
+      testStylist.Update(newName);
+
+      string result = testStylist.GetName();
+
+      Assert.Equal(newName, result);
+    }
+
+
 
     public void Dispose()
     {

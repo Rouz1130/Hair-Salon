@@ -27,11 +27,28 @@ namespace HairSalon
    public void Test2_Equal_ReturnsTrueIfNameAreTheSame()
    {
 
-     Stylist firstStylist = new Stylist("Amy");
-     Stylist secondStylist = new Stylist("Amy");
+     Client firstClient = new Client("Amy");
+     Client secondClient = new Client("Amy");
 
-     Assert.Equal(firstStylist, secondStylist);
+     Assert.Equal(firstClient, secondClient);
    }
+
+
+   [Fact]
+   public void Test3_Save_AssignIdToObject()
+   {
+
+     Client testClient = new Client("Alex");
+
+     testClient.Save();
+     Client savedClient = Client.GetAll()[0];
+
+     int result = savedClient.GetId();
+     int testId = testClient.GetId();
+
+     Assert.Equal(testId, result);
+   }
+
 
 
    public void Dispose()

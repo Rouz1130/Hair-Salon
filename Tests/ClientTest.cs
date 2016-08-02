@@ -22,6 +22,18 @@ namespace HairSalon
    }
 
 
+
+   [Fact]
+   public void Test2_Equal_ReturnsTrueIfNameAreTheSame()
+   {
+
+     Stylist firstStylist = new Stylist("Amy");
+     Stylist secondStylist = new Stylist("Amy");
+
+     Assert.Equal(firstStylist, secondStylist);
+   }
+
+
    public void Dispose()
    {
      Client.DeleteAll();

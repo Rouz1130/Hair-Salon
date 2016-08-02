@@ -8,13 +8,11 @@ namespace HairSalon
   {
     private int _id;
     private string _name;
-    // stylist will go in object as well
 
     public Client(string Name, int Id = 0)
     {
       _id = Id;
       _name = Name;
-
     }
 
     public int GetId()
@@ -29,6 +27,25 @@ namespace HairSalon
     {
       _name = newName;
     }
+
+    public override bool Equals(System.Object otherClient)
+    {
+      if (!(otherClient is Client))
+      {
+        return false;
+      }
+
+      else
+      {
+        Client newClient = (Client) otherClient;
+        bool idEquality = (this.GetId() == newClient.GetId());
+        bool nameEquality = (this.GetName() == newClient.GetName());
+        return (idEquality && nameEquality);
+      }
+    }
+
+
+
     public static List<Client> GetAll()
     {
       List<Client> allClients = new List<Client>{};
@@ -59,22 +76,6 @@ namespace HairSalon
       return allClients;
     }
 
-    public override bool Equals (System.Object otherClient)
-    {
-      if (!(otherClient is Client))
-      {
-        return false;
-      }
-      else
-      {
-        Client newClient = (Client) otherClient;
-        bool idEquality = this.GetId() == newClient.GetName();
-        bool nameEquality = this.GetName() == newClient.GetName();
-        bool stylistEquality = this.GetStylisId() == newClient.GetStylisId();
-        return (idEquality && nameEquality && stylistEquality);
-      }
-    }
-    
 
 
     public static void DeleteAll()

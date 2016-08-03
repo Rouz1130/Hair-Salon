@@ -35,8 +35,9 @@ namespace HairSalon
 
 
    [Fact]
-   public void Test3_Save_AssignIdToObject()
+   public void Test3_Save_AssignsIdToObject()
    {
+
 
      Client testClient = new Client("Alex");
 
@@ -49,6 +50,31 @@ namespace HairSalon
      Assert.Equal(testId, result);
    }
 
+
+   [Fact]
+   public void Test4_SavesToDatabase()
+   {
+     Client testClient = new Client("Paul");
+
+     testClient.Save();
+     List<Client> result = Client.GetAll();
+     List<Client> testList = new List<Client>{testClient};
+
+     Assert.Equal(testList, result);
+   }
+
+
+   [Fact]
+   public void Test5_Find_ClientInDatabase()
+   {
+
+     Client testClient = new Client ("Molly");
+     testClient.Save();
+
+     Client foundClient = Client.Find(testClient.GetId());
+
+     Assert.Equal(testClient, foundClient);
+   }
 
 
    public void Dispose()

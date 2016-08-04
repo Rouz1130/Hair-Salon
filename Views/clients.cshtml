@@ -1,0 +1,19 @@
+</ul>
+<form action="/clients/delete" method="post">
+  <button type="submit">Clear all clients</button>
+</form>
+}
+<a href="/clients/new">Add a new client</a>
+<<a href="/">Home</a>
+@if (@stylist.Count == 0)
+{
+  <h3>No Clients</h3>
+}
+else
+{
+  <h1>Add new Client/h1>
+  <ul>
+    @foreach (var client in Model)
+    {
+      <li>@client.GetName()</li>
+    }

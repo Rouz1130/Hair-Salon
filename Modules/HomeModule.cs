@@ -9,9 +9,10 @@ namespace HairSalon
     public Homemodule()
     {
       Get["/"] = _ => {
+        List<Stylist> allSytlists = Stylist.GetAll();
         return View["index.cshtml"];
       };
     }
 
   }
-} 
+}

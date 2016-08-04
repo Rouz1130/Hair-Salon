@@ -180,6 +180,8 @@ namespace HairSalon
       }
     }
 
+  
+
     public static void DeleteAll()
     {
       SqlConnection conn = DB.Connection();

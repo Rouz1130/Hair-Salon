@@ -1,6 +1,6 @@
 @if (@Model.Count == 0)
 {
-  <h2>Please Add a client</h2>
+  <h1>Please Add a client</h1>
 }
 else
 {
@@ -12,10 +12,8 @@ else
     }
   </ul>
   <form action="/clients/delete" method="post">
-    <button type="submit">Clear all clients</button>
+    <button type="submit">Clear</button>
   </form>
 }
-<a href="/clients/new">Add a new client</a>
-<br>
-<br>
-<a href="/">Home page:</a>
+<h3><a href="/clients/new">Add</a></h3>
+<h3><a href="/">Home</a></h3>

@@ -1,10 +1,14 @@
-<h1>Enter Client information</h2>
-<br>
-<br>
+<h1>New Client</h1>
 <form action="/clients/new" method="post">
-  <label for="client-name">Client Name</label>
+  <label for="client-name">Client name:</label>
   <input id="client-name" name="client-name" type="text">
-  <button type="submit">Add new client</button>
+  <select name="stylist-id">
+    @foreach (var stylist in Model)
+    {
+      <option value="@stylist.GetId()">@stylist.GetName()</option>
+    }
+  </select>
+  <button type="submit">Add</button>
 </form>
-<p><a href="/">Back home</a></p>
-<p><a href="/clients">View all clients</a></p>
+<p><a href="/">Home</a></p>
+<p><a href="/clients">View Clients</a></p>

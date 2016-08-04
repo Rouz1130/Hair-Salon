@@ -45,35 +45,6 @@ namespace HairSalon
     }
 
 
-    public void Save()
-    {
-      //(setp 1) 3 steps in when we use parameters in our queries
-      SqlConnection conn = DB.Connection();
-      conn.Open();
-
-      // placeholder @clients (step 2)
-      SqlCommand cmd = new SqlCommand("INSERT INTO clients(name) OUTPUT INSERTED.id VALUES (@ClientName);", conn);
-      // declare an SqlParameter object and assign values (step 3)
-      SqlParameter nameParameter = new SqlParameter();
-      nameParameter.ParameterName = "@ClientName";
-      nameParameter.Value = this.GetName();
-      cmd.Parameters.Add(nameParameter);//adding the sqlparameter object to the sqlcommand command properties
-      SqlDataReader rdr = cmd.ExecuteReader();
-
-      while(rdr.Read())
-      {
-        this._id = rdr.GetInt32(0);
-      }
-      if (rdr != null)
-      {
-        rdr.Close();
-      }
-      if (conn != null)
-      {
-        conn.Close();
-      }
-
-    }
 
     public static List<Client> GetAll()
     {
@@ -105,6 +76,35 @@ namespace HairSalon
       return allClients;
     }
 
+    public void Save()
+    {
+      //(setp 1) 3 steps in when we use parameters in our queries
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      // placeholder @clients (step 2)
+      SqlCommand cmd = new SqlCommand("INSERT INTO clients(name) OUTPUT INSERTED.id VALUES (@ClientName);", conn);
+      // declare an SqlParameter object and assign values (step 3)
+      SqlParameter nameParameter = new SqlParameter();
+      nameParameter.ParameterName = "@ClientName";
+      nameParameter.Value = this.GetName();
+      cmd.Parameters.Add(nameParameter);//adding the sqlparameter object to the sqlcommand command properties
+      SqlDataReader rdr = cmd.ExecuteReader();
+
+      while(rdr.Read())
+      {
+        this._id = rdr.GetInt32(0);
+      }
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+      if (conn != null)
+      {
+        conn.Close();
+      }
+
+    }
 
     public static Client Find(int id)
     {

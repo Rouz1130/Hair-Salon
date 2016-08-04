@@ -12,6 +12,11 @@ namespace HairSalon
     {
       DBConfiguration.ConnectionString = "Data Source=(localdb)\\mssqllocaldb;Initial Catalog=hair_salon_test;Integrated Security=SSPI;";
     }
+    
+    public void Dispose()
+    {
+      Client.DeleteAll();
+    }
 
     [Fact]
     public void Test1_DatabaseEmptyAtFirst()
@@ -79,7 +84,7 @@ namespace HairSalon
 
 
       [Fact]
-      public void Test5_Update_UpdatesClientInDatabase()
+      public void Test6_Update_UpdatesClientInDatabase()
       {
         string name = "Denzel";
         Client testClient = new Client(name);
@@ -88,15 +93,11 @@ namespace HairSalon
         string newName = "Kyle";
         testClient.Update(newName);
         string result = testClient.GetName();
-        
+
         Assert.Equal(newName, result);
       }
 
 
-    public void Dispose()
-    {
-      Client.DeleteAll();
-    }
 
   }
 }

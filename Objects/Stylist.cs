@@ -34,6 +34,20 @@ namespace HairSalon
     {
       _name = newName;
     }
+    // like the kitten example, allows us too use two same names without it getting confused
+    public override bool Equals(System.Object otherStylist)
+    {
+      if (!(otherStylist is Stylist))
+      {
+        return false;
+      }
+      else
+      {
+        Stylist newStylist = (Stylist) otherStylist;
+        bool nameEquality = (this.GetName() == newStylist.GetName());
+        return (nameEquality);
+      }
+    }
 
     public static List<Stylist> GetAll()
     {
@@ -64,20 +78,6 @@ namespace HairSalon
       }
 
       return allStylists;
-    }
-    // like the kitten example, allows us too use two same names without it getting confused
-    public override bool Equals(System.Object otherStylist)
-    {
-      if (!(otherStylist is Stylist))
-      {
-        return false;
-      }
-      else
-      {
-        Stylist newStylist = (Stylist) otherStylist;
-        bool nameEquality = (this.GetName() == newStylist.GetName());
-        return (nameEquality);
-      }
     }
 
 
@@ -111,7 +111,7 @@ namespace HairSalon
 
     }
 
-    //
+
     public static Stylist Find(int id)
     {
       SqlConnection conn = DB.Connection();

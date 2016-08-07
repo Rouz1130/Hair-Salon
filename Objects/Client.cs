@@ -8,11 +8,13 @@ namespace HairSalon
   {
     private int _id;
     private string _name;
-
+    private in _stylistId
     public Client(string Name, int Id = 0)
     {
       _id = Id;
       _name = Name;
+      _styliistId = StylistId;
+
     }
 
     public int GetId()

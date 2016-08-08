@@ -12,7 +12,7 @@ namespace HairSalon
     {
       DBConfiguration.ConnectionString = "Data Source=(localdb)\\mssqllocaldb;Initial Catalog=hair_salon_test;Integrated Security=SSPI;";
     }
-    
+
     public void Dispose()
     {
       Client.DeleteAll();
@@ -32,8 +32,8 @@ namespace HairSalon
     public void Test2_Equal_ReturnsTrueIfNameAreTheSame()
     {
 
-      Client firstClient = new Client("Amy");
-      Client secondClient = new Client("Amy");
+      Client firstClient = new Client("Amy",1);
+      Client secondClient = new Client("Amy",1);
 
       Assert.Equal(firstClient, secondClient);
     }
@@ -44,7 +44,7 @@ namespace HairSalon
     {
 
 
-      Client testClient = new Client("Alex");
+      Client testClient = new Client("Alex",1);
 
       testClient.Save();
       Client savedClient = Client.GetAll()[0];
@@ -57,23 +57,10 @@ namespace HairSalon
 
 
     [Fact]
-    public void Test4_SavesToDatabase()
-    {
-      Client testClient = new Client("Paul");
-
-      testClient.Save();
-      List<Client> result = Client.GetAll();
-      List<Client> testList = new List<Client>{testClient};
-
-      Assert.Equal(testList, result);
-    }
-
-
-    [Fact]
     public void Test5_Find_FindClientInDatabase()
     {
 
-      Client testClient = new Client("Robert");
+      Client testClient = new Client("Robert",1);
       testClient.Save();
 
       Client foundClient = Client.Find(testClient.GetId());
@@ -81,22 +68,6 @@ namespace HairSalon
 
       Assert.Equal(testClient, foundClient);
     }
-
-
-      [Fact]
-      public void Test6_Update_UpdatesClientInDatabase()
-      {
-        string name = "Denzel";
-        Client testClient = new Client(name);
-        testClient.Save();
-
-        string newName = "Kyle";
-        testClient.Update(newName);
-        string result = testClient.GetName();
-
-        Assert.Equal(newName, result);
-      }
-
 
 
   }

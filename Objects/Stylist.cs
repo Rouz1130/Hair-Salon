@@ -34,20 +34,6 @@ namespace HairSalon
     {
       _name = newName;
     }
-    // like the kitten example, allows us too use two same names without it getting confused
-    public override bool Equals(System.Object otherStylist)
-    {
-      if (!(otherStylist is Stylist))
-      {
-        return false;
-      }
-      else
-      {
-        Stylist newStylist = (Stylist) otherStylist;
-        bool nameEquality = (this.GetName() == newStylist.GetName());
-        return (nameEquality);
-      }
-    }
 
     public static List<Stylist> GetAll()
     {
@@ -80,6 +66,53 @@ namespace HairSalon
       return allStylists;
     }
 
+    public List<Client> GetClients()
+  {
+    SqlConnection conn = DB.Connection();
+    conn.Open();
+
+    SqlCommand cmd = new SqlCommand("SELECT * FROM clients WHERE stylist_id = @StylistId;", conn);
+    SqlParameter stylistIdParameter = new SqlParameter();
+    stylistIdParameter.ParameterName = "@StylistId";
+    stylistIdParameter.Value = this.GetId();
+    cmd.Parameters.Add(stylistIdParameter);
+    SqlDataReader rdr = cmd.ExecuteReader();
+
+    List<Client> clients = new List<Client> {};
+    while(rdr.Read())
+    {
+      int clientId = rdr.GetInt32(0);
+      string clientName = rdr.GetString(1);
+      int clientStylistId = rdr.GetInt32(2);
+      Client newClient = new Client(clientName, clientStylistId, clientId);
+      clients.Add(newClient);
+    }
+    if (rdr != null)
+    {
+      rdr.Close();
+    }
+    if (conn != null)
+    {
+      conn.Close();
+    }
+    return clients;
+  }
+
+    // like the kitten example, allows us too use two same names without it getting confused
+    public override bool Equals(System.Object otherStylist)
+    {
+      if (!(otherStylist is Stylist))
+      {
+        return false;
+      }
+      else
+      {
+        Stylist newStylist = (Stylist) otherStylist;
+        bool nameEquality = (this.GetName() == newStylist.GetName());
+        return (nameEquality);
+      }
+    }
+
 
     public void Save()
     {
@@ -88,7 +121,7 @@ namespace HairSalon
       conn.Open();
 
       // placeholder @sytlistName (step 2)
-      SqlCommand cmd = new SqlCommand("INSERT INTO stylists(name) OUTPUT INSERTED.id VALUES (@stylistName);", conn);
+      SqlCommand cmd = new SqlCommand("INSERT INTO stylists(name) OUTPUT INSERTED.id VALUES (@StylistName);", conn);
       // declare an SqlParameter object and assign values (step 3)
       SqlParameter nameParameter = new SqlParameter();
       nameParameter.ParameterName = "@StylistName";
@@ -179,8 +212,26 @@ namespace HairSalon
         conn.Close();
       }
     }
+    //not a delete all method/function its a single delete run a test to see if it works
+    public void Delete()
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
 
-  
+      SqlCommand cmd = new SqlCommand("DELETE FROM stylists WHERE id = @StylistId; DELETE FROM clients WHERE stylist_id = @StylistId;", conn);
+
+      SqlParameter stylistIdParameter = new SqlParameter();
+      stylistIdParameter.ParameterName = "@StylistId";
+      stylistIdParameter.Value = this.GetId();
+
+      cmd.Parameters.Add(stylistIdParameter);
+      cmd.ExecuteNonQuery();
+
+      if (conn != null)
+      {
+        conn.Close();
+      }
+    }
 
     public static void DeleteAll()
     {

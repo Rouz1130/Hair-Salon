@@ -24,6 +24,7 @@ namespace HairSalon
     public void Test1_DatabaseEmptyAtFirst()
     {
       int result = Stylist.GetAll().Count;
+
       Assert.Equal(0, result);
     }
 

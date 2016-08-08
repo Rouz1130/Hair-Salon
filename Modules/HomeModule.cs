@@ -43,6 +43,10 @@ namespace HairSalon
        return View["confirm.cshtml"];
      };
 
+     Post["/clients/delete"] = _ => {
+       Client.DeleteAll();
+       return View["delete.cshtml"];
+     };
 
 
 
